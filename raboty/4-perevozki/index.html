@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сколько стоит переезд в Витебске — калькулятор грузоперевозок (демо-концепт)</title>
+<meta name="description" content="Посчитайте стоимость переезда или грузоперевозки по Витебску за минуту: машина, часы, грузчики, вывоз мусора. Демо-концепт по открытому объявлению.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14181f; --steel:#41505f; --mist:#71818f;
+  --paper:#f4f6f8; --card:#ffffff; --line:#e2e8ee;
+  --amber:#f5911e; --amber-dk:#dd7a06; --amber-lt:#fdecd6;
+  --navy:#173156; --navy-lt:#e9eef6; --ok:#1f7a4d;
+  --shadow:0 30px 70px -34px rgba(20,30,45,.42);
+  --shadow-sm:0 14px 34px -18px rgba(20,30,45,.3);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Manrope',sans-serif;font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-weight:800;line-height:1.08;letter-spacing:-.025em}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 22px}
+.eyebrow{font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-dk);margin-bottom:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;font:inherit;font-weight:800;font-size:15px;color:#fff;background:var(--amber);
+  padding:0 30px;border:2px solid var(--amber);border-radius:12px;text-decoration:none;transition:.25s;cursor:pointer}
+.btn:hover{background:var(--amber-dk);border-color:var(--amber-dk);transform:translateY(-1px)}
+.btn.ghost{color:var(--navy);background:transparent;border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--navy);transform:none}
+.demo{background:var(--navy);color:#c9d6e6;font-size:13.5px;line-height:1.45;padding:9px 16px;text-align:center}
+.demo b{color:#fff}
+
+nav{background:#fff;border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:14px;padding-bottom:14px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;line-height:1.15;text-decoration:none}
+.logo .mark{width:36px;height:36px;border-radius:10px;background:var(--amber);display:grid;place-items:center;flex:none}
+.logo .mark svg{width:21px;height:21px;fill:#fff}
+.logo small{display:block;font-weight:500;font-size:12.5px;color:var(--mist)}
+nav .btn{min-height:44px;padding:0 18px;font-size:14px}
+
+/* первый экран */
+.hero{background:linear-gradient(180deg,#fff 0%,var(--paper) 100%);padding:48px 0 30px}
+.hero .g{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.hero .g>div{min-width:0}
+@media(max-width:880px){.hero .g{grid-template-columns:1fr;gap:28px}}
+.hero h1{font-size:clamp(32px,4.6vw,54px)}
+.hero h1 span{color:var(--amber-dk)}
+.hero p{color:var(--steel);font-size:18.5px;margin:16px 0 24px;max-width:32em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-top:26px;font-size:15px;color:var(--steel);font-weight:600}
+.facts span::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:9px;vertical-align:2px}
+.photo{position:relative}
+.photo img{width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:24px;box-shadow:var(--shadow)}
+.photo .chip{position:absolute;left:-12px;bottom:20px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--shadow-sm);font-size:13.5px;font-weight:700;color:var(--steel);line-height:1.3}
+.photo .chip b{display:block;font-size:22px;color:var(--navy)}
+.photo .cap{font-size:12px;color:var(--mist);margin-top:8px;text-align:right}
+@media(max-width:560px){.photo .chip{left:10px}}
+
+section{padding:64px 0}
+.sec-h{text-align:center;max-width:700px;margin:0 auto 36px}
+.sec-h h2{font-size:clamp(28px,3.8vw,42px)}
+.sec-h p{color:var(--steel);margin-top:12px}
+
+/* калькулятор */
+.calc-sec{background:linear-gradient(180deg,var(--paper),var(--amber-lt) 60%,var(--paper))}
+.calc{background:var(--card);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.15fr .85fr;overflow:hidden}
+@media(max-width:900px){.calc{grid-template-columns:1fr}}
+.calc-form{padding:clamp(24px,3.6vw,46px);min-width:0}
+.grp{margin-bottom:26px}
+.grp>label,.grp>.lbl{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:800;font-size:15px;margin-bottom:10px}
+.grp .lbl small,.grp>label small{font-weight:600;color:var(--mist);font-size:13px}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:620px){.opts{grid-template-columns:1fr}}
+.opt{text-align:left;font:inherit;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.2s;color:var(--ink)}
+.opt b{display:block;font-size:15.5px}
+.opt span{display:block;font-size:13px;color:var(--mist);margin-top:2px;line-height:1.35}
+.opt:hover{border-color:#c9d3de}
+.opt.on{border-color:var(--amber);background:#fff;box-shadow:0 0 0 4px var(--amber-lt)}
+.range{display:flex;align-items:center;gap:14px}
+.range input{flex:1;accent-color:var(--amber);height:28px}
+.range output{min-width:84px;text-align:center;font-weight:800;font-size:17px;background:var(--navy-lt);color:var(--navy);border-radius:10px;padding:6px 10px}
+.step{display:flex;align-items:center;gap:0;border:2px solid var(--line);border-radius:14px;width:max-content;overflow:hidden}
+.step button{width:52px;height:50px;font:inherit;font-size:22px;font-weight:700;background:var(--paper);border:0;cursor:pointer;color:var(--navy)}
+.step button:hover{background:var(--navy-lt)}
+.step button:disabled{opacity:.35;cursor:default}
+.step output{min-width:130px;text-align:center;font-weight:800;font-size:16px}
+.checks{display:grid;gap:10px}
+.chk{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;transition:.2s}
+.chk:hover{border-color:#c9d3de}
+.chk input{accent-color:var(--amber);width:20px;height:20px;margin-top:2px;flex:none}
+.chk b{font-size:15px}
+.chk span{display:block;font-size:13px;color:var(--mist);line-height:1.35}
+.chk em{font-style:normal;margin-left:auto;font-weight:800;color:var(--navy);white-space:nowrap;font-size:14.5px}
+.chk:has(input:checked){border-color:var(--amber);background:#fff}
+.hint{font-size:13.5px;color:var(--amber-dk);font-weight:600;margin-top:8px;min-height:1em}
+
+.calc-out{background:var(--navy);color:#fff;padding:clamp(24px,3.6vw,46px);display:flex;flex-direction:column}
+.calc-out .lbl{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#8ba0b8;font-weight:700}
+.calc-out .sum{font-size:clamp(40px,6vw,60px);font-weight:800;letter-spacing:-.03em;margin:6px 0 2px;line-height:1.05}
+.calc-out .sum small{font-size:.42em;font-weight:700;color:#8ba0b8;letter-spacing:0}
+.calc-out .sum span{color:var(--amber)}
+.calc-out .sub{font-size:14px;color:#a9bace}
+.brk{border-top:1px solid rgba(255,255,255,.14);margin-top:20px;padding-top:14px}
+.brk .r{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;color:#d3deeb;padding:5px 0}
+.brk .r b{color:#fff;white-space:nowrap}
+.brk .r.disc b{color:#7fe0b0}
+.notes{margin-top:16px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.07);font-size:13.5px;color:#c3d0e0}
+.notes b{color:#fff;display:block;margin-bottom:4px}
+.notes li{margin-left:18px;margin-top:3px}
+.calc-out .btn{margin-top:22px;width:100%}
+
+/* машины */
+.cars{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.cars{grid-template-columns:1fr}}
+.car{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:var(--shadow-sm)}
+.car .tag{display:inline-block;background:var(--amber-lt);color:var(--amber-dk);font-weight:800;font-size:12.5px;padding:4px 11px;border-radius:999px}
+.car h3{font-size:24px;margin:10px 0 6px}
+.car .dims{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
+.car .dims div{background:var(--paper);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--mist)}
+.car .dims b{display:block;font-size:18px;color:var(--navy)}
+
+/* услуги */
+.svc{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
+@media(max-width:860px){.svc{grid-template-columns:1fr}}
+.svc img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:22px;box-shadow:var(--shadow-sm)}
+.svc .cap{font-size:12px;color:var(--mist);margin-top:8px}
+.svc ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.svc ul{grid-template-columns:1fr}}
+.svc li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-weight:600;font-size:15px;display:flex;gap:10px}
+.svc li::before{content:'✓';color:var(--amber-dk);font-weight:800}
+
+/* прайс */
+.price{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;max-width:820px;margin:0 auto}
+.price .r{display:flex;justify-content:space-between;gap:14px;padding:16px 22px;border-top:1px solid var(--line);font-size:16px}
+.price .r:first-child{border-top:0}
+.price .r b{white-space:nowrap;color:var(--navy)}
+.price .r.q b{color:var(--mist);font-weight:600}
+.price-note{max-width:820px;margin:14px auto 0;font-size:14px;color:var(--mist);text-align:center}
+
+/* заявка */
+.lead{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow-sm)}
+@media(max-width:860px){.lead{grid-template-columns:1fr}}
+.lead .l{background:var(--amber-lt);padding:clamp(26px,4vw,44px)}
+.lead .l h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:12px}
+.lead .l p{color:var(--steel)}
+.lead .l ul{list-style:none;margin-top:18px;display:grid;gap:8px;font-weight:600;font-size:15px}
+.lead .l li::before{content:'— ';color:var(--amber-dk)}
+form{padding:clamp(26px,4vw,44px);display:grid;gap:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.two{grid-template-columns:1fr}}
+form label{display:grid;gap:6px;font-weight:700;font-size:14.5px}
+form input,form textarea{font:inherit;font-size:16px;padding:13px 14px;border:2px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);width:100%}
+form input:focus,form textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+form textarea{min-height:130px;resize:vertical;font-size:14.5px;line-height:1.5}
+.tg{display:inline-flex;align-items:center;gap:10px;margin-top:20px;background:#2aa3df;color:#fff;font-weight:800;font-size:15px;padding:0 22px;min-height:50px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.tg svg{width:20px;height:20px;fill:#fff}
+.tg[aria-disabled="true"]{background:#b9cbdb;cursor:default}
+.tg small{font-weight:600;font-size:12px;opacity:.9}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.err{display:none;background:#fdecea;color:#a33a2b;border-radius:12px;padding:12px 14px;font-weight:600;font-size:14.5px}
+.ok{display:none;background:#e5f4ec;color:var(--ok);border-radius:12px;padding:14px;font-weight:700}
+
+.mbar{display:none}
+@media(max-width:900px){.mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);color:#fff;padding:10px 14px;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 -10px 30px -12px rgba(20,30,45,.5)}
+  .mbar .t{font-size:12.5px;color:#a9bace;line-height:1.2}.mbar .t b{display:block;font-size:22px;color:#fff}.mbar .t b span{color:var(--amber)}
+  .mbar .btn{min-height:46px;padding:0 20px;font-size:14px}body{padding-bottom:70px}}
+footer{padding:34px 0 44px;color:var(--mist);font-size:13.5px;text-align:center;line-height:1.6}
+footer a{color:var(--mist)}
+</style>
+</head>
+<body>
+
+<div class="demo"><b>Демо-концепт.</b> Учебная работа по открытому объявлению перевозчика на Kufar. Это не его сайт, заявки никуда не отправляются, цены — из объявления, «от».</div>
+
+<nav><div class="wrap">
+  <a class="logo" href="#"><span class="mark"><svg viewBox="0 0 24 24"><path d="M3 5h11v9H3zM14 8h4l3 3v3h-7zM6.5 18.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6zm11 0a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"/></svg></span><span>Грузоперевозки · Витебск<small>переезды, грузчики, вывоз мусора</small></span></a>
+  <a class="btn" href="#calc">Рассчитать</a>
+</div></nav>
+
+<header class="hero"><div class="wrap g">
+  <div>
+    <div class="eyebrow">Переезды и грузоперевозки по Витебску</div>
+    <h1>Сколько стоит переезд? <span>Посчитайте за минуту</span></h1>
+    <p>Выберите машину, сколько часов и грузчиков нужно, отметьте вывоз мусора или пианино — и сразу увидите цену. Заявка уйдёт уже с готовым расчётом.</p>
+    <div class="cta"><a class="btn" href="#calc">Рассчитать стоимость</a><a class="btn ghost" href="#price">Смотреть цены</a></div>
+    <div class="facts"><span>Подача — через час</span><span>Работаем без выходных</span><span>Наличный и безналичный расчёт</span><span>Крепёж во всех машинах</span></div>
+  </div>
+  <div class="photo">
+    <img src="img/furgon.jpg" alt="Грузовой фургон для переездов">
+    <div class="chip"><b>от 70 руб/час</b>машина и 2 грузчика</div>
+    <div class="cap">Иллюстрация, не фото перевозчика</div>
+  </div>
+</div></header>
+
+<section id="calc" class="calc-sec"><div class="wrap">
+  <div class="sec-h">
+    <div class="eyebrow">Калькулятор</div>
+    <h2>Посчитайте свой переезд</h2>
+    <p>Цены — из объявления перевозчика, все «от». Сумма пересчитывается сразу.</p>
+  </div>
+  <div class="calc">
+    <div class="calc-form">
+      <div class="grp">
+        <div class="lbl">Машина</div>
+        <div class="opts" id="car">
+          <button type="button" class="opt" data-car="bus"><b>Обычный бус</b><span>3,5 × 1,9 × 1,8 м · ≈ 12 м³</span></button>
+          <button type="button" class="opt on" data-car="gazel"><b>Большая газель</b><span>5,1 × 2,1 × 2,1 м · ≈ 22,5 м³</span></button>
+          <button type="button" class="opt" data-car="none"><b>Без машины</b><span>только грузчики</span></button>
+        </div>
+      </div>
+      <div class="grp">
+        <label for="hours">Сколько часов <small>неполный час — уточняется</small></label>
+        <div class="range"><input type="range" id="hours" min="1" max="10" step="1" value="3"><output id="hoursOut">3 часа</output></div>
+      </div>
+      <div class="grp">
+        <div class="lbl">Грузчики <small>от 17 руб/час каждый</small></div>
+        <div class="step"><button type="button" id="mMinus" aria-label="Меньше грузчиков">−</button><output id="moversOut">2 грузчика</output><button type="button" id="mPlus" aria-label="Больше грузчиков">+</button></div>
+        <div class="hint" id="hint"></div>
+      </div>
+      <div class="grp">
+        <div class="lbl">Дополнительно</div>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" id="trash"><div><b>Вывоз мусора</b><span>старая мебель, хлам, строительный мусор</span></div><em>+ от 90 руб</em></label>
+          <label class="chk"><input type="checkbox" id="piano"><div><b>Пианино</b><span>спуск, подъём, перенос — цена зависит от этажа</span></div><em>+ от 120 руб</em></label>
+          <label class="chk"><input type="checkbox" id="furniture"><div><b>Разборка и сборка мебели</b><span>есть в услугах, цена в объявлении не указана</span></div><em>уточняется</em></label>
+          <label class="chk"><input type="checkbox" id="outside"><div><b>Поездка за город</b><span>цена километра в объявлении не указана</span></div><em>уточняется</em></label>
+          <label class="chk"><input type="checkbox" id="regular"><div><b>Я постоянный клиент</b><span>скидка постоянным клиентам</span></div><em>− 15%</em></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-out" aria-live="polite">
+      <div class="lbl">Ориентировочно</div>
+      <div class="sum"><small>от </small><span id="total">300</span> <small>руб</small></div>
+      <div class="sub" id="sub">большая газель · 3 часа · 2 грузчика</div>
+      <div class="brk" id="brk"></div>
+      <div class="notes" id="notes"></div>
+      <a class="btn" href="#zayavka" id="toLead">Оставить заявку с этим расчётом</a>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="eyebrow">Машины</div><h2>Какая машина нужна</h2><p>Размеры кузова — из объявления. Ставка одна: от 35 руб/час за машину.</p></div>
+  <div class="cars">
+    <div class="car"><span class="tag">Для небольших перевозок</span><h3>Обычный бус</h3><p style="color:var(--steel)">Доставка покупок, перевозка бытовой техники, мини-переезд, вещи на дачу.</p>
+      <div class="dims"><div><b>3,5 м</b>длина</div><div><b>1,9 м</b>ширина</div><div><b>1,8 м</b>высота</div><div><b>≈ 12 м³</b>объём</div></div></div>
+    <div class="car"><span class="tag">Для квартирного переезда</span><h3>Большая газель</h3><p style="color:var(--steel)">Квартирный и офисный переезд, крупная мебель, много коробок за один рейс.</p>
+      <div class="dims"><div><b>5,1 м</b>длина</div><div><b>2,1 м</b>ширина</div><div><b>2,1 м</b>высота</div><div><b>≈ 22,5 м³</b>объём</div></div></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap svc">
+  <div><img src="img/kuzov.jpg" alt="Кузов грузовика, загруженный коробками и мебелью" loading="lazy"><div class="cap">Иллюстрация, не фото перевозчика</div></div>
+  <div>
+    <div class="eyebrow">Что делаем</div>
+    <h2 style="font-size:clamp(26px,3.4vw,38px);margin-bottom:20px">От коробки до пианино</h2>
+    <ul>
+      <li>Квартирный переезд</li><li>Офисный переезд</li><li>Дачный переезд</li><li>Перевозка бытовой техники</li>
+      <li>Разборка и сборка мебели</li><li>Погрузка и разгрузка</li><li>Вывоз мусора и старой мебели</li><li>Спуск и подъём пианино</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+  <div class="sec-h"><div class="eyebrow">Цены</div><h2>Прайс из объявления</h2></div>
+  <div class="price">
+    <div class="r"><span>Грузовая машина</span><b>от 35 руб/час</b></div>
+    <div class="r"><span>1 грузчик</span><b>от 17 руб/час</b></div>
+    <div class="r"><span>Машина и 2 грузчика</span><b>от 70 руб/час</b></div>
+    <div class="r"><span>Вывоз мусора</span><b>от 90 руб</b></div>
+    <div class="r"><span>Пианино: спуск, подъём, перенос</span><b>от 120 руб</b></div>
+    <div class="r"><span>Постоянным клиентам</span><b>скидка 15%</b></div>
+    <div class="r q"><span>Минимальный заказ, неполный час, километр за городом, этаж без лифта</span><b>уточняется</b></div>
+  </div>
+  <p class="price-note">Окончательную цену перевозчик называет после уточнения адресов, этажей и объёма вещей.</p>
+</div></section>
+
+<section id="zayavka" style="padding-top:0"><div class="wrap lead">
+  <div class="l">
+    <div class="eyebrow">Заявка</div>
+    <h2>Отправьте расчёт — перевозчик перезвонит</h2>
+    <p>Расчёт из калькулятора уже в заявке. Добавьте адреса и дату — так цену назовут точнее.</p>
+    <ul><li>на месте — через час</li><li>без выходных</li><li>наличный и безналичный расчёт</li></ul>
+    <a class="tg" id="tgBtn" href="#" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M21.9 4.3l-3.2 15.1c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.2 13 1.4 11.5c-1-.3-1-1 .2-1.5L20.5 2.8c.9-.3 1.6.2 1.4 1.5z"/></svg><span id="tgTxt">Написать в Telegram <small>· подключим позже</small></span></a>
+  </div>
+  <form id="f">
+    <div class="two">
+      <label>Как к вам обращаться<input name="name" autocomplete="name" required></label>
+      <label>Телефон<input name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 …" required></label>
+    </div>
+    <div class="two">
+      <label>Откуда — куда<input name="route" placeholder="ул. Ленина, 5 (3 этаж) → пр. Строителей"></label>
+      <label>Когда<input name="date" placeholder="суббота, утро"></label>
+    </div>
+    <label>Расчёт — можно дописать<textarea name="calc" id="calcText"></textarea></label>
+    <div class="hp" aria-hidden="true"><label>Сайт <input id="fSite" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <button class="btn" type="submit" id="send">Отправить заявку</button>
+    <div class="err" id="err" role="alert"></div>
+    <div class="ok" id="ok">Спасибо! Это демо-страница — заявка никуда не ушла. На рабочем сайте она сразу придёт перевозчику в мессенджер вместе с расчётом.</div>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  Демо-концепт по открытому объявлению на Kufar (Витебск, на Kufar с марта 2024). Цены — из объявления, «от», не являются публичной офертой; окончательную стоимость называет перевозчик.<br>
+  Фото: <a href="https://commons.wikimedia.org/wiki/File:2016_GAZ_A31R32_GAZelle_Next_orange_front.jpg" target="_blank" rel="noopener">alex74_2011</a>, CC BY 4.0;
+  <a href="https://commons.wikimedia.org/wiki/File:An_Overview_of_Moving_Companies_and_Their_Use_of_Moving_Boxes.jpg" target="_blank" rel="noopener">brownpau</a>, CC BY 2.0 — Wikimedia Commons. Иллюстрации, не фото перевозчика.
+</div></footer>
+
+<div class="mbar"><div class="t">Ориентировочно<b>от <span id="mTotal">210</span> руб</b></div><a class="btn" href="#zayavka" id="mLead">Заявка</a></div>
+
+<script>
+// =====================================================================
+//  ЦЕНЫ ИЗ ОБЪЯВЛЕНИЯ (Kufar 228395458) — белорусские рубли, все «от».
+//  Меняются цены — меняйте только этот блок.
+// =====================================================================
+const PRICE = {
+  truckHour: 35,      // грузовая машина, руб/час
+  moverHour: 17,      // один грузчик, руб/час
+  bundle2Hour: 70,    // машина и 2 грузчика, руб/час (связка из объявления)
+  trash: 90,          // вывоз мусора, от
+  piano: 120,         // пианино: спуск/подъём/перенос, от (зависит от этажа)
+  regularDiscount: 0.15, // скидка постоянным клиентам
+};
+// =====================================================================
+//  СВЯЗЬ — заполнить, когда подключим Telegram (сейчас пусто = демо).
+//   TELEGRAM_URL — ссылка на Telegram перевозчика или его бота, напр. https://t.me/имя_бота
+//   LEAD_URL     — адрес приёма заявок бота (как у «Гаража 57»: https://<воркер>.workers.dev/lead);
+//                  пока пусто, форма демо и никуда не отправляет.
+// =====================================================================
+const CONTACT = { TELEGRAM_URL: '', LEAD_URL: '' };
+
+const CARS = { bus: 'обычный бус', gazel: 'большая газель', none: 'без машины' };
+const MOVERS_MAX = 6;
+
+// =====================================================================
+//  ФОРМУЛА
+//   без машины:                 грузчики × 17 × часы
+//   машина и ровно 2 грузчика:  70 × часы (связка)
+//   машина и другое число:      35 × часы + грузчики × 17 × часы
+//   + вывоз мусора 90, + пианино 120;  − 15% постоянному клиенту
+//  Эталон: газель, 3 ч, 2 грузчика, мусор → 70×3 + 90 = 300.
+// =====================================================================
+function compute(s) {
+  const rows = [];
+  let work;
+  if (s.car === 'none') {
+    work = PRICE.moverHour * s.movers * s.hours;
+    rows.push([`Грузчики: ${s.movers} × ${PRICE.moverHour} руб × ${s.hours} ч`, work]);
+  } else if (s.movers === 2) {
+    work = PRICE.bundle2Hour * s.hours;
+    rows.push([`Машина и 2 грузчика: ${PRICE.bundle2Hour} руб × ${s.hours} ч`, work]);
+  } else {
+    const truck = PRICE.truckHour * s.hours, movers = PRICE.moverHour * s.movers * s.hours;
+    rows.push([`Машина: ${PRICE.truckHour} руб × ${s.hours} ч`, truck]);
+    if (s.movers > 0) rows.push([`Грузчики: ${s.movers} × ${PRICE.moverHour} руб × ${s.hours} ч`, movers]);
+    work = truck + movers;
+  }
+  let total = work;
+  if (s.trash) { rows.push(['Вывоз мусора', PRICE.trash]); total += PRICE.trash; }
+  if (s.piano) { rows.push(['Пианино', PRICE.piano]); total += PRICE.piano; }
+  let disc = 0;
+  if (s.regular) { disc = Math.round(total * PRICE.regularDiscount * 100) / 100; total = Math.round((total - disc) * 100) / 100; }
+  return { rows, disc, total };
+}
+
+// =====================================================================
+//  Экран
+// =====================================================================
+const $ = (id) => document.getElementById(id);
+const st = { car: 'gazel', hours: 3, movers: 2, trash: false, piano: false, furniture: false, outside: false, regular: false };
+const fmt = (n) => n.toLocaleString('ru-RU', { maximumFractionDigits: 2 });
+const plural = (n, a, b, c) => { const m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : (m >= 2 && m <= 4 && (h < 12 || h > 14) ? b : c); };
+const hoursText = (h) => `${h} ${plural(h, 'час', 'часа', 'часов')}`;
+const moversText = (m) => m === 0 ? 'без грузчиков' : `${m} ${plural(m, 'грузчик', 'грузчика', 'грузчиков')}`;
+
+function render() {
+  const minMovers = st.car === 'none' ? 1 : 0;
+  if (st.movers < minMovers) st.movers = minMovers;
+  $('mMinus').disabled = st.movers <= minMovers;
+  $('mPlus').disabled = st.movers >= MOVERS_MAX;
+  $('hoursOut').textContent = hoursText(st.hours);
+  $('moversOut').textContent = moversText(st.movers);
+  $('hint').textContent = st.car === 'none' ? 'Без машины нужен хотя бы один грузчик.' :
+    (st.movers === 2 ? 'Считаем по связке «машина и 2 грузчика» — от 70 руб/час.' : '');
+
+  const r = compute(st);
+  $('total').textContent = fmt(r.total);
+  $('mTotal').textContent = fmt(r.total);
+  const extras = [st.trash && 'вывоз мусора', st.piano && 'пианино'].filter(Boolean);
+  $('sub').textContent = [CARS[st.car], hoursText(st.hours), moversText(st.movers), ...extras].join(' · ');
+  $('brk').innerHTML = r.rows.map(([t, v]) => `<div class="r"><span>${t}</span><b>${fmt(v)} руб</b></div>`).join('') +
+    (r.disc ? `<div class="r disc"><span>Скидка постоянному клиенту 15%</span><b>− ${fmt(r.disc)} руб</b></div>` : '');
+
+  const notes = ['Минимальный заказ и неполный час — уточняйте у перевозчика.'];
+  if (st.piano) notes.push('Пианино: цена зависит от этажа.');
+  if (st.furniture) notes.push('Разборка и сборка мебели — цена уточняется.');
+  if (st.outside) notes.push('За городом добавится оплата километров — цена уточняется.');
+  notes.push('Этаж без лифта может изменить цену.');
+  $('notes').innerHTML = '<b>Что ещё влияет на цену</b><ul>' + notes.map((n) => `<li>${n}</li>`).join('') + '</ul>';
+}
+
+function leadText() {
+  const r = compute(st);
+  const lines = [`Расчёт с сайта: от ${fmt(r.total)} руб.`,
+    `${CARS[st.car][0].toUpperCase() + CARS[st.car].slice(1)}, ${hoursText(st.hours)}, ${moversText(st.movers)}.`];
+  const add = [st.trash && 'вывоз мусора', st.piano && 'пианино', st.furniture && 'разборка/сборка мебели', st.outside && 'поездка за город'].filter(Boolean);
+  if (add.length) lines.push('Дополнительно: ' + add.join(', ') + '.');
+  if (st.regular) lines.push('Постоянный клиент (скидка 15%).');
+  return lines.join('\n');
+}
+
+$('car').addEventListener('click', (e) => {
+  const b = e.target.closest('.opt'); if (!b) return;
+  $('car').querySelectorAll('.opt').forEach((x) => x.classList.toggle('on', x === b));
+  st.car = b.dataset.car; render();
+});
+$('hours').addEventListener('input', (e) => { st.hours = +e.target.value; render(); });
+$('mMinus').onclick = () => { st.movers--; render(); };
+$('mPlus').onclick = () => { st.movers++; render(); };
+['trash', 'piano', 'furniture', 'outside', 'regular'].forEach((k) => $(k).addEventListener('change', (e) => { st[k] = e.target.checked; render(); }));
+$('toLead').addEventListener('click', () => { $('calcText').value = leadText(); });
+$('mLead').addEventListener('click', () => { $('calcText').value = leadText(); });
+// Telegram-кнопка: работает, как только в CONTACT появится ссылка.
+if (CONTACT.TELEGRAM_URL) {
+  $('tgBtn').href = CONTACT.TELEGRAM_URL; $('tgBtn').target = '_blank'; $('tgBtn').rel = 'noopener';
+  $('tgBtn').removeAttribute('aria-disabled'); $('tgTxt').textContent = 'Написать в Telegram';
+} else {
+  $('tgBtn').addEventListener('click', (e) => e.preventDefault());
+}
+
+// Отправка: если задан LEAD_URL — заявка с расчётом уходит в Telegram-бота, иначе демо.
+$('f').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  if (!$('calcText').value.trim()) $('calcText').value = leadText();
+  const f = this, err = $('err'); err.style.display = 'none';
+  const phone = f.tel.value.trim();
+  if (!f.name.value.trim()) { f.name.focus(); return; }
+  if (phone.replace(/\D/g, '').length < 9) { err.textContent = 'Проверьте телефон: нужно не меньше 9 цифр.'; err.style.display = 'block'; f.tel.focus(); return; }
+  if (CONTACT.LEAD_URL) {
+    $('send').disabled = true; $('send').textContent = 'Отправляю…';
+    let ok = false;
+    try {
+      const r = await fetch(CONTACT.LEAD_URL, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: AbortSignal.timeout(15000),
+        body: JSON.stringify({ source: 'calc', name: f.name.value.trim(), phone, route: f.route.value.trim(), date: f.date.value.trim(),
+          calc: $('calcText').value.trim(), total: compute(st).total, website: $('fSite').value }) });
+      ok = !!(await r.json().catch(() => ({}))).ok;
+    } catch (x) {}
+    $('send').disabled = false; $('send').textContent = 'Отправить заявку';
+    if (!ok) { err.textContent = 'Не получилось отправить заявку. Попробуйте ещё раз или напишите в Telegram.'; err.style.display = 'block'; return; }
+    $('ok').textContent = 'Спасибо! Заявка с расчётом отправлена — перевозчик перезвонит.';
+  }
+  $('ok').style.display = 'block';
+  $('send').disabled = true;
+});
+render();
+</script>
+</body>
+</html>
