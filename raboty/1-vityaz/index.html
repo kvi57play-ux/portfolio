@@ -5,133 +5,164 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ремонт техники при заводе «Витязь» — Витебск (демо-концепт)</title>
 <meta name="description" content="Демо-концепт страницы сервисного центра при заводе «Витязь», Витебск. Учебная работа, не официальный сайт.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{box-sizing:border-box}
-  :root{
-    --bg:#F5F6F8;--panel:#FFFFFF;--ink:#14202E;--muted:#556273;--faint:#8A95A3;
-    --line:#DCE1E7;--brand:#0E4C92;--brand-hi:#1763B8;--accent:#E5A50A;--ok:#1F7A4D;
-  }
-  html,body{margin:0}
-  body{background:var(--bg);color:var(--ink);font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    -webkit-font-smoothing:antialiased;padding-bottom:76px}
-  h1,h2,h3,p,ul,ol{margin:0;padding:0}
-  ul,ol{list-style:none}
-  a{color:var(--brand)}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+  :root{--paper:#f6f1e7;--paper2:#efe7d6;--ink:#171310;--ox:#7a2222;--ox-hi:#962b2b;--sepia:#6b5d4a;--line:#d9cfbc;--warn-bg:#f3e3c4;--warn:#7a5212;--ok:#2f6b3f}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:78px}
+  @media(min-width:900px){body{padding-bottom:0}}
+  .serif{font-family:'Fraunces',Georgia,serif}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  img{display:block;max-width:100%}
 
-  .demo{background:#14202E;color:#C9D3DF;font-size:13.5px;line-height:1.45;padding:9px 0;text-align:center}
+  .demo{background:var(--ink);color:#d9cfbc;font-size:13.5px;line-height:1.45;padding:9px 16px;text-align:center}
   .demo b{color:#fff}
 
-  header{background:var(--panel);border-bottom:1px solid var(--line)}
-  header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;padding-bottom:14px}
-  .logo{font-weight:800;letter-spacing:-.01em;font-size:18px;line-height:1.2}
-  .logo small{display:block;font-weight:500;color:var(--muted);font-size:13px}
-  .hdr-tel{font-weight:800;text-decoration:none;font-size:17px;white-space:nowrap}
-  @media(max-width:560px){.hdr-tel{display:none}}
+  /* шапка-«газета» */
+  .mast{border-bottom:2px solid var(--ink);padding:14px 0 0}
+  .mast .top{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia)}
+  .mast .top a{text-decoration:none;font-weight:600;color:var(--ink);letter-spacing:.04em;font-size:15px;text-transform:none}
+  .mast .name{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(44px,8vw,88px);text-align:center;letter-spacing:-.02em;line-height:1;margin:14px 0 8px}
+  .mast .name i{font-style:italic;font-weight:400;color:var(--ox)}
+  .mast .sub{text-align:center;font-family:'Fraunces',serif;font-style:italic;font-size:17px;color:var(--sepia);border-top:1px solid var(--line);padding:9px 0}
+  @media(max-width:600px){.mast .top span{display:none}.mast .top{justify-content:center}}
 
-  .hero{background:linear-gradient(160deg,#0E4C92 0%,#0A3566 100%);color:#fff;padding:44px 0 48px}
-  .hero .tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
-    border-radius:100px;padding:5px 14px;font-size:14px;margin-bottom:18px}
-  .hero h1{font-size:clamp(30px,5.6vw,50px);line-height:1.12;letter-spacing:-.025em;font-weight:800;max-width:20ch}
-  .hero h1 em{font-style:normal;color:var(--accent)}
-  .hero p{margin-top:16px;font-size:clamp(17px,2vw,20px);color:#D3E0F0;max-width:46ch}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 26px;
-    border-radius:12px;font-weight:800;font-size:18px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
-  .btn-y{background:var(--accent);color:#14202E}
-  .btn-y:hover{filter:brightness(1.07)}
-  .btn-o{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.45)}
-  .btn-b{background:var(--brand);color:#fff}
-  .btn-b:hover{background:var(--brand-hi)}
-  .hero .facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;font-size:15.5px;color:#D3E0F0}
+  /* первый экран */
+  .lead{padding:36px 0 56px;border-bottom:1px solid var(--line)}
+  .lead .g{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  @media(max-width:860px){.lead .g{grid-template-columns:1fr;gap:30px}}
+  .kicker{font-family:'Fraunces',serif;font-style:italic;color:var(--ox);font-size:19px;margin-bottom:12px}
+  .lead h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(32px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em}
+  .lead h1 em{color:var(--ox);font-style:italic;font-weight:600}
+  .lead p.txt{margin-top:16px;font-size:18.5px;color:#3d342a;max-width:34em}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--sepia)}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 28px;font-family:'Fraunces',serif;font-size:19px;
+    text-decoration:none;border:1.5px solid var(--ink);cursor:pointer;transition:.25s;background:var(--ink);color:var(--paper)}
+  .btn:hover{background:var(--ox);border-color:var(--ox)}
+  .btn.o{background:transparent;color:var(--ink)}
+  .btn.o:hover{background:var(--ink);color:var(--paper)}
+  figure{margin:0}
+  figure img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:sepia(.18) saturate(.9);border:1px solid var(--line)}
+  figcaption{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--sepia);margin-top:8px}
 
-  section{padding:46px 0}
-  section h2{font-size:clamp(25px,3.4vw,34px);letter-spacing:-.02em;line-height:1.2}
-  section .lead{color:var(--muted);margin-top:8px;max-width:58ch}
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .sec-title{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--ox);letter-spacing:.03em;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+  .sec-title::after{content:'';flex:1;height:1px;background:var(--line)}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,4.2vw,48px);line-height:1.06;letter-spacing:-.015em}
+  .intro{color:var(--sepia);margin-top:12px;max-width:40em}
 
-  .grid{display:grid;gap:12px;margin-top:24px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px}
-  .card h3{font-size:18.5px;line-height:1.3}
-  .card p{color:var(--muted);font-size:15.5px;margin-top:5px}
-  .ico{width:40px;height:40px;border-radius:10px;background:#E7EEF7;color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  /* что ремонтируем */
+  .rub{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:30px}
+  .card{background:var(--paper);padding:28px 26px;transition:.3s}
+  .card:hover{background:var(--paper2)}
+  .card .no{font-family:'Fraunces',serif;font-size:15px;color:var(--ox)}
+  .card h3{font-family:'Fraunces',serif;font-weight:600;font-size:26px;line-height:1.1;margin:8px 0 8px}
+  .card p{font-size:16px;color:var(--sepia)}
+  @media(max-width:860px){.rub{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.rub{grid-template-columns:1fr}}
 
-  .steps{counter-reset:s;display:grid;gap:12px;margin-top:24px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-  .steps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
-  .steps li::before{content:counter(s);display:flex;align-items:center;justify-content:center;width:34px;height:34px;
-    border-radius:50%;background:var(--brand);color:#fff;font-weight:800;margin-bottom:10px}
-  .steps b{display:block;font-size:18px}
-  .steps span{color:var(--muted);font-size:15.5px}
+  /* как проходит ремонт */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:34px;counter-reset:s}
+  .steps li{list-style:none;counter-increment:s;border-top:2px solid var(--ink);padding-top:14px}
+  .steps li::before{content:counter(s,decimal-leading-zero);display:block;font-family:'Fraunces',serif;font-weight:400;font-size:46px;line-height:1;color:var(--ox);margin-bottom:10px}
+  .steps b{display:block;font-family:'Fraunces',serif;font-weight:600;font-size:21px;line-height:1.2;margin-bottom:6px}
+  .steps span{color:var(--sepia);font-size:16px}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
 
-  .rent{background:var(--panel);border:2px solid var(--accent);border-radius:18px;padding:26px;
-    display:grid;gap:18px;grid-template-columns:1fr auto;align-items:center}
-  @media(max-width:700px){.rent{grid-template-columns:1fr}}
-  .rent h2{font-size:clamp(23px,3vw,30px)}
-  .rent p{color:var(--muted);margin-top:8px}
+  /* подсказка — как цитата */
+  .pull{padding:70px 0;text-align:center}
+  .pull blockquote{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(26px,3.8vw,42px);line-height:1.15;letter-spacing:-.01em;max-width:860px;margin:0 auto}
+  .pull blockquote em{color:var(--ox)}
+  .tips{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:36px auto 0;max-width:1000px;text-align:left}
+  .tips div{background:var(--paper);padding:22px 20px;font-size:16px;color:#3d342a}
+  .tips b{display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:var(--ox);font-size:28px;line-height:1;margin-bottom:8px}
+  @media(max-width:860px){.tips{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.tips{grid-template-columns:1fr}}
 
-  .tip{background:#FFF8E5;border:1px solid #F0D98A;border-radius:14px;padding:20px 22px;margin-top:22px}
-  .tip h3{font-size:19px}
-  .tip ol{list-style:decimal;padding-left:22px;margin-top:10px;color:#4A3F1C}
-  .tip li{margin-top:4px}
+  /* прокат */
+  .rent{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center}
+  .rent img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line)}
+  .rent p{color:#3d342a;margin-top:14px;max-width:36em}
+  @media(max-width:760px){.rent{grid-template-columns:1fr;gap:24px}.rent figure{max-width:300px}}
 
-  .contacts{display:grid;gap:16px;grid-template-columns:1fr 1fr;margin-top:24px}
-  @media(max-width:760px){.contacts{grid-template-columns:1fr}}
-  .box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
-  .box dl{margin:0;display:grid;gap:14px}
-  .box dt{font-size:14px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
-  .box dd{margin:2px 0 0;font-size:18px}
-  .warn{display:inline-block;font-size:13px;background:#FFF1D6;color:#8A5A00;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:2px}
+  .reviews{border:1.5px dashed var(--line);padding:28px;text-align:center;color:var(--sepia);font-family:'Fraunces',serif;font-style:italic;margin-top:24px}
 
-  form{display:grid;gap:12px}
-  label{font-weight:700;font-size:16px;display:grid;gap:5px}
-  input,textarea{font:inherit;font-size:18px;padding:13px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
-  input:focus,textarea:focus{outline:3px solid #BBD3EE;border-color:var(--brand)}
-  textarea{min-height:92px;resize:vertical}
-  .ok{display:none;background:#E5F4EC;color:var(--ok);border-radius:10px;padding:14px;font-weight:700}
+  /* контакты и форма */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:30px}
+  @media(max-width:860px){.contact{grid-template-columns:1fr;gap:32px}}
+  dl{display:grid;gap:20px}
+  dt{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--sepia);font-weight:600}
+  dd{margin-top:3px;font-family:'Fraunces',serif;font-size:22px;line-height:1.3}
+  dd small{display:block;font-family:'Inter',sans-serif;font-size:15px;color:var(--sepia);margin-top:2px}
+  .warn{display:inline-block;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.04em;background:var(--warn-bg);color:var(--warn);padding:2px 8px;margin-left:8px;vertical-align:4px}
+  .form{border:1.5px solid var(--ink);padding:32px;background:#fbf8f1}
+  .form h3{font-family:'Fraunces',serif;font-weight:600;font-size:28px;line-height:1.1}
+  .form .note{color:var(--sepia);font-size:15.5px;margin:6px 0 16px}
+  .field{border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:6px}
+  .field label{display:block;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sepia);font-weight:600}
+  .field input,.field textarea{width:100%;border:none;background:transparent;outline:none;font-family:'Fraunces',serif;font-size:20px;color:var(--ink);padding-top:4px;resize:vertical}
+  .field textarea{min-height:70px;font-size:18px}
+  .field:focus-within{border-color:var(--ink)}
+  .form .btn{width:100%;margin-top:18px}
+  .ok{display:none;background:#e3ecd9;color:var(--ok);padding:14px 16px;margin-top:14px;font-size:16px;font-weight:600}
 
-  .reviews{border:2px dashed var(--line);border-radius:16px;padding:26px;text-align:center;color:var(--faint);margin-top:22px;font-size:16px}
+  footer{padding:36px 0 44px;font-family:'Fraunces',serif;font-style:italic;color:var(--sepia);font-size:15px;line-height:1.55}
+  footer a{color:var(--sepia)}
 
-  footer{border-top:1px solid var(--line);padding:24px 0 30px;color:var(--faint);font-size:14px}
-
-  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);
-    padding:10px 16px;display:flex;gap:10px;z-index:5}
-  .bar .btn{flex:1;min-height:52px;font-size:17px;padding:0 12px;white-space:nowrap}
-  @media(min-width:900px){.bar{display:none}body{padding-bottom:0}}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1.5px solid var(--ink);padding:10px 14px;display:flex;gap:10px;z-index:5}
+  .bar .btn{flex:1;min-height:52px;font-size:18px;padding:0 10px;white-space:nowrap}
+  @media(min-width:900px){.bar{display:none}}
 </style>
 </head>
 <body>
 
 <div class="demo"><b>Демо-концепт.</b> Учебная работа, собрана по открытым данным. Это не официальный сайт ОАО «Витязь», заявки с формы никуда не отправляются.</div>
 
-<header><div class="wrap">
-  <div class="logo">Сервисный центр «Витязь»<small>ремонт техники для населения · Витебск</small></div>
-  <a class="hdr-tel" href="tel:+375212263942">+375 (212) 26-39-42</a>
+<header class="mast"><div class="wrap">
+  <div class="top"><span>Витебск · ул. Петруся Бровки, 13а</span><a href="tel:+375212263942">+375 (212) 26-39-42</a></div>
+  <div class="name">Сервис <i>«Витязь»</i></div>
+  <div class="sub">ремонт телевизоров и бытовой техники при заводе — для жителей Витебска</div>
 </div></header>
 
-<div class="hero"><div class="wrap">
-  <span class="tag">Сервис при заводе, который сам выпускает телевизоры</span>
-  <h1>Починим телевизор и бытовую технику <em>в сервисе завода «Витязь»</em></h1>
-  <p>Телевизоры, спутниковое оборудование, микроволновки, пылесосы, кофеварки, кондиционеры. Приезжайте на Бровки, 13а или позвоните — подскажем, что делать.</p>
-  <div class="cta">
-    <a class="btn btn-y" href="tel:+375212263942">📞 Позвонить</a>
-    <a class="btn btn-o" href="#zayavka">Перезвоните мне</a>
+<div class="lead"><div class="wrap g">
+  <div>
+    <div class="kicker">Сервис при заводе, который сам выпускает телевизоры</div>
+    <h1>Починим телевизор и бытовую технику — <em>в сервисе завода «Витязь»</em></h1>
+    <p class="txt">Телевизоры, спутниковое оборудование, микроволновки, пылесосы, кофеварки, кондиционеры. Приезжайте на Бровки, 13а или позвоните — подскажем, что делать.</p>
+    <div class="meta"><span>ул. Петруся Бровки, 13а</span><span>будни, график уточняется</span><span>есть прокат телевизоров</span></div>
+    <div class="cta">
+      <a class="btn" href="tel:+375212263942">Позвонить</a>
+      <a class="btn o" href="#zayavka">Перезвоните мне</a>
+    </div>
   </div>
-  <div class="facts"><span>📍 ул. Петруся Бровки, 13а</span><span>🕘 будни, график уточняется</span><span>📺 есть прокат телевизоров</span></div>
+  <figure>
+    <img src="img/masterskaya.jpg" alt="Рабочий стол мастера-электронщика с паяльной станцией и ящиками с деталями">
+    <figcaption>Рабочее место электронщика. Иллюстрация, не фото сервиса.</figcaption>
+  </figure>
 </div></div>
 
 <section><div class="wrap">
+  <div class="sec-title">Рубрика первая</div>
   <h2>Что ремонтируем</h2>
-  <p class="lead">Список — по открытым данным сервиса. Если вашей техники здесь нет, всё равно позвоните: скажем, возьмутся ли.</p>
-  <div class="grid">
-    <div class="card"><div class="ico">📺</div><h3>Телевизоры</h3><p>Ремонт, обслуживание и диагностика.</p></div>
-    <div class="card"><div class="ico">📡</div><h3>Спутниковые системы</h3><p>Ресиверы и оборудование для спутникового ТВ.</p></div>
-    <div class="card"><div class="ico">🚗</div><h3>Автомагнитолы</h3><p>Диагностика и ремонт.</p></div>
-    <div class="card"><div class="ico">🍲</div><h3>Кухонная техника</h3><p>Микроволновые печи, кухонные комбайны, кофеварки.</p></div>
-    <div class="card"><div class="ico">🧹</div><h3>Пылесосы</h3><p>Ремонт и обслуживание.</p></div>
-    <div class="card"><div class="ico">❄️</div><h3>Кондиционеры</h3><p>Ремонт и обслуживание.</p></div>
+  <p class="intro">Список — по открытым данным сервиса. Если вашей техники здесь нет, всё равно позвоните: скажем, возьмутся ли.</p>
+  <div class="rub">
+    <div class="card"><div class="no">№ 01</div><h3>Телевизоры</h3><p>Ремонт, обслуживание и диагностика.</p></div>
+    <div class="card"><div class="no">№ 02</div><h3>Спутниковые системы</h3><p>Ресиверы и оборудование для спутникового ТВ.</p></div>
+    <div class="card"><div class="no">№ 03</div><h3>Автомагнитолы</h3><p>Диагностика и ремонт.</p></div>
+    <div class="card"><div class="no">№ 04</div><h3>Кухонная техника</h3><p>Микроволновые печи, кухонные комбайны, кофеварки.</p></div>
+    <div class="card"><div class="no">№ 05</div><h3>Пылесосы</h3><p>Ремонт и обслуживание.</p></div>
+    <div class="card"><div class="no">№ 06</div><h3>Кондиционеры</h3><p>Ремонт и обслуживание.</p></div>
   </div>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
+<section><div class="wrap">
+  <div class="sec-title">Рубрика вторая</div>
   <h2>Как проходит ремонт</h2>
   <ol class="steps">
     <li><b>Звоните или оставляете заявку</b><span>Рассказываете, что случилось. Подскажем, везти ли технику и что взять с собой.</span></li>
@@ -139,64 +170,69 @@
     <li><b>Узнаёте цену и срок</b><span>Мастер говорит, что сломалось, сколько стоит ремонт и когда будет готово. Решаете вы.</span></li>
     <li><b>Забираете готовую технику</b><span>Проверяете при мастере, что всё работает.</span></li>
   </ol>
+</div></section>
 
-  <div class="tip">
-    <h3>💡 Как описать поломку по телефону, чтобы мастер сразу понял</h3>
-    <ol>
-      <li>Что за техника и марка (посмотрите на наклейку сзади или снизу).</li>
-      <li>Что именно происходит: не включается, нет звука, полосы на экране, щёлкает, пахнет гарью.</li>
-      <li>Когда началось и было ли что-то перед этим: скачок света, гроза, переезд, упал.</li>
-      <li>Горит ли лампочка или индикатор, когда включаете в розетку.</li>
-    </ol>
+<section class="pull"><div class="wrap">
+  <blockquote>Не нужно разбираться в технике, чтобы мастер сразу понял, что случилось. <em>Достаточно рассказать четыре вещи.</em></blockquote>
+  <div class="tips">
+    <div><b>i.</b>Что за техника и марка — посмотрите на наклейку сзади или снизу.</div>
+    <div><b>ii.</b>Что именно происходит: не включается, нет звука, полосы на экране, щёлкает, пахнет гарью.</div>
+    <div><b>iii.</b>Когда началось и было ли что-то перед этим: скачок света, гроза, переезд, упал.</div>
+    <div><b>iv.</b>Горит ли лампочка или индикатор, когда включаете в розетку.</div>
   </div>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
-  <div class="rent">
-    <div>
-      <h2>📺 Телевизор на время ремонта</h2>
-      <p>При сервисе работает пункт проката телевизоров: пока ваш в ремонте, можно взять другой. Условия и стоимость проката уточняйте по телефону.</p>
-    </div>
-    <a class="btn btn-b" href="tel:+375212263942">Узнать условия</a>
+<section><div class="wrap rent">
+  <figure>
+    <img src="img/vityaz-tv.jpg" alt="Телевизор «Витязь Микра»" loading="lazy">
+    <figcaption>Телевизор «Витязь Микра». Фото из Википедии.</figcaption>
+  </figure>
+  <div>
+    <div class="sec-title">Чего нет у частных мастеров</div>
+    <h2>Телевизор на время ремонта</h2>
+    <p>При сервисе работает пункт проката телевизоров: пока ваш в ремонте, можно взять другой — и не пропускать новости. Условия и стоимость проката уточняйте по телефону.</p>
+    <div class="cta"><a class="btn o" href="tel:+375212263942">Узнать условия</a></div>
   </div>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
-  <h2>Отзывы</h2>
+<section><div class="wrap">
+  <div class="sec-title">Отзывы</div>
+  <h2>Что говорят клиенты</h2>
   <div class="reviews">Здесь будут отзывы клиентов — после согласования с сервисом. Выдуманных отзывов на странице нет.</div>
 </div></section>
 
-<section style="padding-top:0" id="zayavka"><div class="wrap">
-  <h2>Адрес и связь</h2>
-  <div class="contacts">
-    <div class="box"><dl>
-      <div><dt>Адрес</dt><dd>г. Витебск, ул. Петруся Бровки, 13а<br><a href="https://yandex.by/maps/?text=%D0%92%D0%B8%D1%82%D0%B5%D0%B1%D1%81%D0%BA%2C%20%D0%9F%D0%B5%D1%82%D1%80%D1%83%D1%81%D1%8F%20%D0%91%D1%80%D0%BE%D0%B2%D0%BA%D0%B8%2013%D0%B0" target="_blank" rel="noopener">Открыть на карте →</a></dd></div>
-      <div><dt>Телефон</dt><dd><a href="tel:+375212263942">+375 (212) 26-39-42</a><span class="warn">уточняется</span></dd></div>
-      <div><dt>Когда работаем</dt><dd>Пн–пт, обед с 13:00 до 14:00 <span class="warn">уточняется</span><br><span style="color:var(--muted);font-size:15.5px">Сб, вс — выходной</span></dd></div>
+<section id="zayavka" style="border-bottom:0"><div class="wrap">
+  <div class="sec-title">Адрес и связь</div>
+  <h2>Приезжайте или позвоните</h2>
+  <div class="contact">
+    <dl>
+      <div><dt>Адрес</dt><dd>г. Витебск, ул. Петруся Бровки, 13а<small><a href="https://yandex.by/maps/?text=%D0%92%D0%B8%D1%82%D0%B5%D0%B1%D1%81%D0%BA%2C%20%D0%9F%D0%B5%D1%82%D1%80%D1%83%D1%81%D1%8F%20%D0%91%D1%80%D0%BE%D0%B2%D0%BA%D0%B8%2013%D0%B0" target="_blank" rel="noopener">Открыть на карте →</a></small></dd></div>
+      <div><dt>Телефон</dt><dd><a href="tel:+375212263942" style="text-decoration:none">+375 (212) 26-39-42</a><span class="warn">уточняется</span></dd></div>
+      <div><dt>Когда работаем</dt><dd>Пн–пт, обед с 13:00 до 14:00<span class="warn">уточняется</span><small>Сб, вс — выходной</small></dd></div>
       <div><dt>Рядом</dt><dd>Магазин «Сделай сам» — там же, при сервисе</dd></div>
-    </dl></div>
+    </dl>
 
-    <div class="box">
-      <h3 style="font-size:21px;margin-bottom:4px">Перезвоните мне</h3>
-      <p style="color:var(--muted);font-size:15.5px;margin-bottom:14px">Оставьте телефон — мастер перезвонит и подскажет, что делать.</p>
-      <form id="f">
-        <label>Как к вам обращаться<input name="name" autocomplete="name" required></label>
-        <label>Телефон<input name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 …" required></label>
-        <label>Что сломалось<textarea name="what" placeholder="Например: телевизор Витязь, не включается, лампочка мигает"></textarea></label>
-        <button class="btn btn-b" type="submit">Жду звонка</button>
-        <div class="ok" id="ok">Спасибо! Это демо-страница — заявка никуда не ушла. На рабочем сайте здесь будет отправка мастеру.</div>
-      </form>
-    </div>
+    <form class="form" id="f">
+      <h3>Перезвоните мне</h3>
+      <p class="note">Оставьте телефон — мастер перезвонит и подскажет, что делать.</p>
+      <div class="field"><label for="fn">Как к вам обращаться</label><input id="fn" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="ft">Телефон</label><input id="ft" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 …" required></div>
+      <div class="field"><label for="fw">Что сломалось</label><textarea id="fw" name="what" placeholder="Например: телевизор Витязь, не включается, лампочка мигает"></textarea></div>
+      <button class="btn" type="submit">Жду звонка</button>
+      <div class="ok" id="ok">Спасибо! Это демо-страница — заявка никуда не ушла. На рабочем сайте здесь будет отправка мастеру.</div>
+    </form>
   </div>
 </div></section>
 
 <footer><div class="wrap">
-  Демо-концепт страницы сервисного центра при ОАО «Витязь». Данные взяты из открытых справочников (vitebsk.biz, vityas.com) 04.11.2026; телефон и график в источниках расходятся и требуют проверки. Цены не указаны — в открытых источниках их нет.
+  Демо-концепт страницы сервисного центра при ОАО «Витязь». Данные взяты из открытых справочников (vitebsk.biz, vityas.com) 04.11.2026; телефон и график в источниках расходятся и требуют проверки. Цены не указаны — в открытых источниках их нет.<br>
+  Фото: <a href="https://commons.wikimedia.org/wiki/File:Soldering_workbench.jpg" target="_blank" rel="noopener">Windell Oskay</a>, CC BY 2.0;
+  <a href="https://commons.wikimedia.org/wiki/File:%D0%92%D0%B8%D1%82%D1%8F%D0%B7%D1%8C_%D0%9C%D0%B8%D0%BA%D1%80%D0%B0.jpg" target="_blank" rel="noopener">Monoklon</a>, CC BY 3.0 — Wikimedia Commons.
 </div></footer>
 
 <div class="bar">
-  <a class="btn btn-y" href="tel:+375212263942">📞 Позвонить</a>
-  <a class="btn btn-b" href="#zayavka">Заявка</a>
+  <a class="btn" href="tel:+375212263942">Позвонить</a>
+  <a class="btn o" href="#zayavka">Заявка</a>
 </div>
 
 <script>
