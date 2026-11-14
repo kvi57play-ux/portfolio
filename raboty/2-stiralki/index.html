@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сломалась стиральная машина? Подскажу за минуту — Витебск (демо-концепт)</title>
+<meta name="description" content="Демо-концепт: квиз для мастера по ремонту стиральных машин в Витебске. Учебная работа.">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#F2F6F8;--panel:#fff;--ink:#12232E;--muted:#536673;--faint:#8797A2;--line:#D6E0E6;
+    --brand:#0B6E8A;--brand-hi:#0D82A3;--brand-dim:#E3F1F5;--accent:#E5A50A;--ok:#1F7A4D;--warn:#B54708;
+  }
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font:18px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,p,ul{margin:0;padding:0}
+  ul{list-style:none}
+  a{color:var(--brand)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+  .demo{background:#12232E;color:#C6D4DC;font-size:13.5px;line-height:1.45;padding:9px 16px;text-align:center}
+  .demo b{color:#fff}
+
+  .hero{background:linear-gradient(160deg,#0B6E8A,#084C60);color:#fff;padding:38px 0 64px}
+  .hero .k{font-size:14px;color:#BFE0EA;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .hero h1{font-size:clamp(28px,5.4vw,44px);line-height:1.13;letter-spacing:-.02em;margin-top:10px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{margin-top:12px;color:#D4E9EF;max-width:44ch}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .pills span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:5px 13px;font-size:14.5px}
+
+  .quiz{background:var(--panel);border:1px solid var(--line);border-radius:20px;margin-top:-40px;
+    box-shadow:0 18px 40px -24px rgba(18,35,46,.35);padding:22px 20px 24px;position:relative}
+  .prog{display:flex;gap:6px;margin-bottom:18px}
+  .prog i{flex:1;height:6px;border-radius:4px;background:var(--line)}
+  .prog i.on{background:var(--brand)}
+  .step{display:none}
+  .step.on{display:block}
+  .q{font-size:clamp(21px,3.4vw,26px);font-weight:800;letter-spacing:-.015em;line-height:1.25}
+  .hint{color:var(--muted);font-size:15.5px;margin-top:4px}
+  .opts{display:grid;gap:10px;margin-top:16px;grid-template-columns:1fr 1fr}
+  @media(max-width:560px){.opts{grid-template-columns:1fr}}
+  .opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;font:inherit;font-size:17px;font-weight:600;color:var(--ink);
+    background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;cursor:pointer;min-height:58px}
+  .opt:hover{border-color:var(--brand);background:var(--brand-dim)}
+  .opt .e{font-size:24px;line-height:1;width:30px;text-align:center;flex:none}
+  .back{background:none;border:0;color:var(--muted);font:inherit;font-size:15.5px;margin-top:14px;cursor:pointer;padding:6px 0}
+
+  .res h2{font-size:clamp(22px,3.6vw,28px);letter-spacing:-.015em;line-height:1.25}
+  .blk{border-radius:14px;padding:16px 18px;margin-top:14px}
+  .blk h3{font-size:16px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+  .blk ul{display:grid;gap:5px}
+  .blk li{padding-left:20px;position:relative}
+  .blk li::before{content:'•';position:absolute;left:4px;font-weight:800}
+  .cause{background:var(--brand-dim)} .cause h3{color:var(--brand)}
+  .now{background:#FFF6E0;border:1px solid #F2D58A} .now h3{color:var(--warn)}
+  .money{background:#fff;border:1.5px solid var(--line)}
+  .money h3{color:var(--ink)}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px dashed var(--line)}
+  .row:first-of-type{border-top:0}
+  .row b{white-space:nowrap}
+  .small{font-size:14px;color:var(--faint);margin-top:8px}
+
+  form{display:grid;gap:11px;margin-top:18px}
+  label{font-weight:700;font-size:16px;display:grid;gap:5px}
+  input,textarea{font:inherit;font-size:17px;padding:12px 13px;border:1.5px solid var(--line);border-radius:10px;width:100%;color:var(--ink);background:#fff}
+  input:focus,textarea:focus{outline:3px solid #BFE0EA;border-color:var(--brand)}
+  textarea{min-height:96px;resize:vertical;font-size:15.5px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border-radius:12px;border:0;cursor:pointer;
+    font:inherit;font-weight:800;font-size:18px;text-decoration:none;background:var(--accent);color:#12232E}
+  .btn:hover{filter:brightness(1.06)}
+  .btn.g{background:none;border:1.5px solid var(--line);color:var(--brand);font-size:16px;min-height:48px}
+  .ok{display:none;background:#E5F4EC;color:var(--ok);border-radius:10px;padding:14px;font-weight:700}
+
+  section{padding:40px 0 0}
+  section h2{font-size:clamp(23px,3.2vw,30px);letter-spacing:-.02em}
+  .list{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;margin-top:14px}
+  @media(max-width:560px){.list{grid-template-columns:1fr}}
+  .list li{padding-left:26px;position:relative;color:var(--muted)}
+  .list li::before{content:'✓';position:absolute;left:2px;color:var(--brand);font-weight:800}
+  .faq{margin-top:14px;display:grid;gap:10px}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  summary{font-weight:700;cursor:pointer}
+  details p{color:var(--muted);margin-top:8px}
+  .reviews{border:2px dashed var(--line);border-radius:14px;padding:22px;text-align:center;color:var(--faint);margin-top:14px;font-size:16px}
+  footer{color:var(--faint);font-size:14px;padding:36px 0 40px}
+</style>
+</head>
+<body>
+
+<div class="demo"><b>Демо-концепт.</b> Учебная работа по открытому объявлению частного мастера на Kufar. Это не его сайт, заявки никуда не отправляются.</div>
+
+<div class="hero"><div class="wrap">
+  <div class="k">Ремонт стиральных машин · Витебск и район</div>
+  <h1>Машина встала посреди стирки? <em>Ответьте на 3 вопроса</em> — подскажу, что делать прямо сейчас</h1>
+  <p>Узнаете вероятную причину, что сделать до приезда мастера и сколько заплатите, даже если решите не ремонтировать.</p>
+  <div class="pills"><span>🚗 Выезд на дом</span><span>🕒 По возможности — в день заявки</span><span>🔧 Верхняя и фронтальная загрузка</span></div>
+</div></div>
+
+<div class="wrap">
+  <div class="quiz" id="quiz">
+    <div class="prog"><i class="on"></i><i></i><i></i><i></i></div>
+
+    <div class="step on" data-step="1">
+      <div class="q">Что случилось с машиной?</div>
+      <div class="hint">Выберите самое похожее</div>
+      <div class="opts" id="symptoms"></div>
+    </div>
+
+    <div class="step" data-step="2">
+      <div class="q">Как загружается бельё?</div>
+      <div class="hint">От этого зависит, как мастер будет разбирать машину</div>
+      <div class="opts">
+        <button class="opt" data-k="load" data-v="фронтальная загрузка (люк спереди)"><span class="e">⭕</span>Люк спереди</button>
+        <button class="opt" data-k="load" data-v="вертикальная загрузка (крышка сверху)"><span class="e">⬆️</span>Крышка сверху</button>
+      </div>
+      <button class="back" data-back>← Назад</button>
+    </div>
+
+    <div class="step" data-step="3">
+      <div class="q">Где стоит машина?</div>
+      <div class="hint">Выезд по городу — 30 р.; за городом стоимость уточняется</div>
+      <div class="opts">
+        <button class="opt" data-k="where" data-v="Витебск"><span class="e">🏙️</span>В Витебске</button>
+        <button class="opt" data-k="where" data-v="Витебский район"><span class="e">🌲</span>В Витебском районе</button>
+      </div>
+      <button class="back" data-back>← Назад</button>
+    </div>
+
+    <div class="step res" data-step="4">
+      <h2 id="r-title"></h2>
+      <div class="blk cause"><h3>Чаще всего причина</h3><ul id="r-cause"></ul></div>
+      <div class="blk now"><h3>⚠️ Что сделать до приезда мастера</h3><ul id="r-now"></ul></div>
+      <div class="blk money">
+        <h3>Сколько это будет стоить</h3>
+        <div class="row"><span>Если ремонтируете</span><b>от 25 р.</b></div>
+        <div class="row"><span>Точная цена</span><b>после диагностики</b></div>
+        <div class="row"><span>Если откажетесь после диагностики</span><b id="r-refuse">55 р.</b></div>
+        <p class="small" id="r-refuse-note">Выезд 30 р. + диагностика 25 р. Их платите только в случае отказа от ремонта. Итог зависит от поломки и запчастей.</p>
+      </div>
+
+      <form id="f">
+        <label>Как к вам обращаться<input name="name" autocomplete="name" required></label>
+        <label>Телефон<input name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+375 …" required></label>
+        <label>Описание для мастера (уже заполнено — можно дописать)<textarea name="msg" id="msg"></textarea></label>
+        <button class="btn" type="submit">Вызвать мастера</button>
+        <div class="ok" id="ok">Готово! Это демо-страница — заявка никуда не ушла. На рабочем сайте она сразу придёт мастеру в мессенджер.</div>
+      </form>
+      <button class="back" id="restart">↺ Пройти заново</button>
+    </div>
+  </div>
+
+  <section>
+    <h2>Что ремонтирую</h2>
+    <ul class="list">
+      <li>Чистка системы залива и слива</li>
+      <li>Замена ТЭНа (не греет воду)</li>
+      <li>Замена клапана залива</li>
+      <li>Замена насоса (не сливает)</li>
+      <li>Замена подшипников, в том числе в неразборных баках</li>
+      <li>Устранение течи</li>
+      <li>Ремонт двигателя</li>
+      <li>Ремонт модуля управления</li>
+      <li>Установка новой машины</li>
+      <li>Совет при выборе новой или б/у машины</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Частые вопросы</h2>
+    <div class="faq">
+      <details><summary>Заплачу за вызов, даже если ничего не починят?</summary><p>Выезд (30 р.) и диагностика (25 р.) оплачиваются, только если вы сами откажетесь от ремонта после диагностики. Если ремонтируете — платите за ремонт.</p></details>
+      <details><summary>Почему нельзя сразу назвать цену?</summary><p>Один и тот же симптом даёт разные поломки: «не сливает» — это может быть засор фильтра или сгоревший насос. Цена отличается в разы. Честнее назвать её после диагностики.</p></details>
+      <details><summary>Приедете в район?</summary><p>Да, выезд в любой район города и за город. Стоимость выезда за город уточняется при заявке.</p></details>
+      <details><summary>Какая гарантия?</summary><p>Условия гарантии уточняются у мастера.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <h2>Отзывы</h2>
+    <div class="reviews">Здесь будут отзывы клиентов — после согласования с мастером. Выдуманных отзывов на странице нет.</div>
+  </section>
+
+  <footer>Демо-концепт по открытому объявлению на Kufar (данные на 04.11.2026). Цены — из объявления мастера, ориентировочные, не являются публичной офертой. Причины поломок и советы — общие рекомендации, точный диагноз ставит мастер на месте.</footer>
+</div>
+
+<script>
+const S = {
+  drain: { e:'🚱', t:'Не сливает воду',
+    cause:['Засорился сливной фильтр (мелочь, носки, монеты)','Засор в шланге или сифоне','Вышел из строя сливной насос'],
+    now:['Отключите машину от розетки','Подставьте низкую ёмкость и тряпки, откройте лючок внизу спереди и медленно слейте воду через фильтр','Не открывайте люк, пока в барабане вода'] },
+  leak: { e:'💧', t:'Течёт вода',
+    cause:['Повреждена манжета люка','Ослаб или треснул шланг','Течь бака или насоса — требует осмотра'],
+    now:['Отключите от розетки и перекройте кран подачи воды','Вытрите пол — вода и электричество рядом опасны','Не запускайте стирку, пока мастер не посмотрит'] },
+  heat: { e:'🥶', t:'Не греет воду',
+    cause:['Вышел из строя ТЭН (нагреватель)','Неисправен датчик температуры','Сработала защита из-за накипи'],
+    now:['Стирать можно, но бельё будет отстирываться хуже','Если при стирке выбивает автомат в щитке — не включайте машину'] },
+  noise: { e:'🔊', t:'Гремит, гудит при отжиме',
+    cause:['Износились подшипники барабана','Попал посторонний предмет между баком и барабаном','Ослабли амортизаторы или противовес'],
+    now:['Не включайте отжим — износ ускоряется','Проверьте карманы вещей и резинку люка на мелкие предметы'] },
+  fill: { e:'🚰', t:'Не набирает воду',
+    cause:['Засорился фильтр-сеточка на входе шланга','Неисправен клапан залива','Закрыт кран или низкий напор'],
+    now:['Проверьте, открыт ли кран подачи воды','Проверьте, нет ли перегиба на заливном шланге'] },
+  spin: { e:'🌀', t:'Не крутит барабан / не отжимает',
+    cause:['Слетел или порвался приводной ремень','Неисправен двигатель','Перегруз или ком белья — машина отказывается отжимать'],
+    now:['Попробуйте разложить бельё и запустить только отжим','Если не помогло — отключите от розетки и не включайте повторно'] },
+  dead: { e:'⛔', t:'Не включается совсем',
+    cause:['Нет питания: розетка, вилка, автомат в щитке','Неисправен модуль управления','Не срабатывает замок люка'],
+    now:['Проверьте розетку другим прибором','Посмотрите, не выбило ли автомат в щитке','Если пахнет гарью — не включайте машину'] },
+  other: { e:'❓', t:'Другое / ошибка на экране',
+    cause:['По коду ошибки мастер обычно сразу понимает, в каком узле проблема'],
+    now:['Сфотографируйте экран с кодом ошибки','Запишите марку и модель — наклейка обычно на люке или сзади'] }
+};
+const A = {};
+const quiz = document.getElementById('quiz');
+const box = document.getElementById('symptoms');
+Object.entries(S).forEach(([k,s]) => {
+  const b = document.createElement('button');
+  b.className = 'opt'; b.dataset.k = 'sym'; b.dataset.v = k;
+  b.innerHTML = '<span class="e">'+s.e+'</span>'+s.t;
+  box.appendChild(b);
+});
+let cur = 1;
+function go(n){
+  cur = n;
+  quiz.querySelectorAll('.step').forEach(el => el.classList.toggle('on', +el.dataset.step === n));
+  quiz.querySelectorAll('.prog i').forEach((el,i) => el.classList.toggle('on', i < n));
+  quiz.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function fill(ul, arr){ ul.innerHTML = arr.map(x => '<li>'+x+'</li>').join(''); }
+function result(){
+  const s = S[A.sym];
+  document.getElementById('r-title').textContent = s.e+' '+s.t;
+  fill(document.getElementById('r-cause'), s.cause);
+  fill(document.getElementById('r-now'), s.now);
+  const city = A.where === 'Витебск';
+  document.getElementById('r-refuse').textContent = city ? '55 р.' : 'от 55 р.';
+  document.getElementById('r-refuse-note').textContent = city
+    ? 'Выезд 30 р. + диагностика 25 р. Их платите только в случае отказа от ремонта. Итог зависит от поломки и запчастей.'
+    : 'Диагностика 25 р. + выезд: по городу 30 р., за город — уточняется. Платите только при отказе от ремонта.';
+  document.getElementById('msg').value = 'Поломка: '+s.t.toLowerCase()+'\nМашина: '+A.load+'\nГде: '+A.where+'\nМарка/модель: ';
+}
+quiz.addEventListener('click', e => {
+  const o = e.target.closest('.opt');
+  if (o){ A[o.dataset.k] = o.dataset.v; if (cur === 3) result(); go(cur + 1); return; }
+  if (e.target.closest('[data-back]')) go(cur - 1);
+});
+document.getElementById('restart').onclick = () => { document.getElementById('ok').style.display='none'; document.querySelector('#f button').disabled=false; go(1); };
+document.getElementById('f').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('ok').style.display = 'block';
+  this.querySelector('button').disabled = true;
+});
+</script>
+</body>
+</html>

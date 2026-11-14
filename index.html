@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Волк — сайты и Telegram-боты для малого бизнеса · Витебск</title>
+<meta name="description" content="Лендинги и Telegram-боты для мастерских, сервисов и частных мастеров: заявка с сайта сразу приходит владельцу в Telegram. Работы с живыми ссылками.">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#F4EFE6;--panel:#FCFAF6;--ink:#2A2219;--muted:#7C6F5D;--faint:#A99C88;
+    --line:rgba(42,34,25,.13);--line2:rgba(42,34,25,.07);
+    --accent:#D97757;--accent-hi:#E89478;--accent-dim:#B85F3F;--tint:rgba(217,119,87,.09);
+  }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#1C1712;--panel:#251E17;--ink:#F2EADF;--muted:#A99A88;--faint:#6E6152;
+    --line:rgba(217,119,87,.2);--line2:rgba(242,234,223,.07);--accent-dim:#E89478;
+  }}
+  html,body{margin:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);line-height:1.6;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,p,ul,li{margin:0;padding:0}
+  ul{list-style:none}
+  a{color:var(--accent-dim);text-underline-offset:3px}
+  img{display:block;max-width:100%}
+  .wrap{max-width:940px;margin:0 auto;padding:0 16px}
+
+  .hero{padding:clamp(40px,7vw,86px) 0 clamp(26px,4vw,44px)}
+  .hero .k{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent-dim);font-weight:700;margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,5.4vw,52px);font-weight:800;letter-spacing:-.035em;line-height:1.08}
+  .hero h1 b{color:var(--accent);font-weight:800}
+  @media(max-width:600px){.hero h1 br{display:none}}
+  .hero p{font-size:clamp(16px,1.7vw,19px);color:var(--muted);margin-top:16px;max-width:58ch}
+  .hero .cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px;align-items:center}
+  .btn{background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:15.5px;
+    padding:14px 28px;border-radius:100px;display:inline-block}
+  .btn:hover{background:var(--accent-hi)}
+  .btn.g{background:none;color:var(--accent-dim);border:1.5px solid var(--line)}
+  .btn.g:hover{border-color:var(--accent)}
+  .btn.s{font-size:14px;padding:10px 20px}
+
+  section{padding:clamp(26px,4vw,44px) 0;border-top:1.5px solid var(--line2)}
+  section h2{font-size:clamp(21px,2.8vw,30px);font-weight:800;letter-spacing:-.025em}
+  section>p{color:var(--muted);margin-top:10px;font-size:16px;max-width:62ch}
+
+  .works{display:grid;gap:16px;margin-top:26px}
+  .work{background:var(--panel);border:1.5px solid var(--line);border-radius:20px;overflow:hidden;
+    display:grid;grid-template-columns:300px 1fr}
+  @media(max-width:760px){.work{grid-template-columns:1fr}}
+  .shot{background:linear-gradient(155deg,#2E251C,#1A1510 70%);padding:20px;
+    display:flex;align-items:center;justify-content:center;text-decoration:none}
+  .shot img{width:100%;border-radius:8px;box-shadow:0 14px 30px -14px rgba(0,0,0,.7);aspect-ratio:16/10;object-fit:cover;object-position:top}
+  .work__b{padding:22px 24px;min-width:0}
+  .work__b .n{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);font-weight:700}
+  .work__b h3{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-top:7px}
+  .work__b .task{color:var(--muted);font-size:15px;margin-top:9px}
+  .work__b ul{display:grid;gap:7px;margin-top:13px}
+  .work__b li{position:relative;padding-left:22px;font-size:14.5px;color:var(--muted)}
+  .work__b li b{color:var(--ink)}
+  .work__b li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;
+    border-radius:50%;background:var(--tint);border:2px solid var(--accent)}
+  .work__f{margin-top:16px;padding-top:13px;border-top:1.5px solid var(--line2);
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .work__f .note{font-size:12.5px;color:var(--faint);font-style:italic;flex:1 1 100%}
+
+  .about{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+  @media(max-width:760px){.about{grid-template-columns:1fr}}
+  .about div{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:16px 17px;font-size:14.5px;color:var(--muted)}
+  .about div em{font-style:normal;color:var(--ink);font-weight:700;display:block;margin-bottom:4px}
+
+  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+  @media(max-width:760px){.how{grid-template-columns:1fr 1fr}}
+  @media(max-width:420px){.how{grid-template-columns:1fr}}
+  .how div{background:var(--panel);border:1.5px solid var(--line);border-radius:16px;padding:16px 17px}
+  .how div b{display:block;font-family:ui-monospace,monospace;font-size:10.5px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--accent-dim);font-weight:700;margin-bottom:7px}
+  .how div span{font-size:14.5px;color:var(--muted)}
+  .how div span em{font-style:normal;color:var(--ink);font-weight:700;display:block;margin-bottom:3px}
+
+  .foot{background:linear-gradient(150deg,#251E17,#1C1712 62%);border-radius:24px;
+    padding:clamp(24px,4vw,42px);margin:clamp(26px,4vw,44px) 0}
+  .foot h2{color:#fff}
+  .foot p{color:#C9BCAD;margin-top:10px;max-width:54ch}
+  .foot .cta{margin-top:22px;display:flex;gap:11px;flex-wrap:wrap}
+  .small{text-align:center;color:var(--faint);font-size:13px;padding:0 0 40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="k">Витебск · сайты и Telegram-боты</div>
+    <h1>Делаю сайты и ботов, с которых<br><b>заявка сразу приходит Вам в Telegram</b></h1>
+    <p>Для мастерских, сервисов и частных мастеров. Клиент за минуту понимает, что Вы делаете и как всё проходит, и оставляет заявку на сайте или в боте. Она приходит Вам в телефон, даже пока Вы заняты работой.</p>
+    <div class="cta">
+      <a class="btn" href="#contact">Написать мне</a>
+      <a class="btn g" href="#sites">Посмотреть работы</a>
+    </div>
+  </div>
+
+  <section id="sites">
+    <h2>Сайты: ремонт техники</h2>
+    <p>Оплаченных заказов пока немного, поэтому показываю работы, которые собрал сам. Эти три — под задачи настоящих мастерских Витебска, по их открытым данным. С владельцами не связывался: это учебные работы, а не заказы. В каждой — что решал и почему.</p>
+
+    <div class="works">
+
+      <article class="work">
+        <a class="shot" href="raboty/1-vityaz/" target="_blank" rel="noopener"><img src="img/vityaz.jpg" alt="Первый экран страницы сервисного центра «Витязь»" loading="lazy"></a>
+        <div class="work__b">
+          <div class="n">Сервисный центр · ремонт ТВ и бытовой техники</div>
+          <h3>Страница сервиса при заводе «Витязь»</h3>
+          <p class="task">У завода есть ремонт для населения, но в интернете его почти не видно: на сайте завода это одна строчка в «прочих услугах», в справочниках разные телефоны. Человек идёт к частнику, не зная, что рядом сервис самого производителя.</p>
+          <ul>
+            <li><b>Первый экран — «сервис при заводе»</b>, а не «качественный ремонт»: это единственное, чем он отличается от сотни частников.</li>
+            <li><b>Крупный шрифт и кнопка «Позвонить» под пальцем</b> — аудитория старше среднего и чаще звонит, чем заполняет формы.</li>
+            <li><b>Прокат телевизора на время ремонта</b> — отдельным блоком: такого у частников нет.</li>
+            <li><b>Подсказка «как описать поломку по телефону»</b> — мастеру проще назвать срок, клиенту не неловко.</li>
+          </ul>
+          <div class="work__f">
+            <a class="btn g s" href="raboty/1-vityaz/" target="_blank" rel="noopener">Открыть страницу</a>
+            <span class="note">Учебная работа по открытым данным. Не официальный сайт завода, заявки с формы никуда не уходят. Где данные расходятся — «уточняется».</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <a class="shot" href="raboty/2-stiralki/" target="_blank" rel="noopener"><img src="img/stiralki.jpg" alt="Квиз «Машина встала посреди стирки?»" loading="lazy"></a>
+        <div class="work__b">
+          <div class="n">Частный мастер · стиральные машины</div>
+          <h3>Квиз для мастера по стиральным машинам</h3>
+          <p class="task">Машина встала посреди стирки, в барабане вода. Человек в стрессе не дочитывает объявление и звонит с вопросом «сколько стоит?», а ответить заранее нельзя. И боится, что «за вызов возьмут, а не починят».</p>
+          <ul>
+            <li><b>Три вопроса вместо прайса</b>: что случилось, какая машина, где живёте. В ответ — вероятная причина и что сделать до приезда мастера.</li>
+            <li><b>Только известные суммы</b>: сколько человек заплатит в худшем случае, если откажется от ремонта. Остальное — «после диагностики», без выдуманных цен.</li>
+            <li><b>Заявка заполняется сама</b> ответами квиза: мастер сразу видит симптом, тип загрузки и район.</li>
+          </ul>
+          <div class="work__f">
+            <a class="btn g s" href="raboty/2-stiralki/" target="_blank" rel="noopener">Пройти квиз</a>
+            <span class="note">Учебная работа по открытому объявлению частного мастера. Имя и телефон мастера на страницу не выносил.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <a class="shot" href="raboty/3-terabajt/" target="_blank" rel="noopener"><img src="img/terabajt.jpg" alt="Первый экран страницы сервиса «Терабайт»" loading="lazy"></a>
+        <div class="work__b">
+          <div class="n">Сервисный центр · ноутбуки, телефоны, оргтехника</div>
+          <h3>Страница и сценарий ролика для «Терабайта»</h3>
+          <p class="task">Сайта нет, только ВКонтакте. Главное преимущество — бесплатная диагностика и выезд мастера — тонет в длинном списке из тридцати услуг.</p>
+          <ul>
+            <li><b>Оффер — «диагностика и выезд бесплатно»</b>: это снимает главный страх «насчитают».</li>
+            <li><b>Два входа: «для дома» и «для офиса»</b> — у офиса свои задачи (принтеры, картриджи), ему не нужно читать про стекло телефона.</li>
+            <li><b>Услуги по устройствам</b>: человек думает «сломался ноутбук», а не «замена термопасты».</li>
+            <li><b>Ролик «как проходит ремонт» за 35 секунд</b> — сценарий готов, подходит и для ВКонтакте.</li>
+          </ul>
+          <div class="work__f">
+            <a class="btn g s" href="raboty/3-terabajt/" target="_blank" rel="noopener">Открыть страницу</a>
+            <span class="note">Учебная работа по открытым данным. Не официальный сайт сервиса. Ролик в монтаже.</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="bots">
+    <h2>Telegram-боты и связка «сайт + бот»</h2>
+    <p>Бот работает круглосуточно: записывает клиента, отвечает на частые вопросы и сразу присылает владельцу заявку с телефоном. Форма на сайте шлёт заявки в того же бота, так что всё приходит в одно место. Обе работы живые — можно оставить заявку и проверить. Бизнесы в них условные.</p>
+
+    <div class="works">
+
+      <article class="work">
+        <a class="shot" href="https://kvi57play-ux.github.io/garazh57/" target="_blank" rel="noopener"><img src="img/garazh57.jpg" alt="Первый экран лендинга автосервиса «Гараж 57»" loading="lazy"></a>
+        <div class="work__b">
+          <div class="n">Автосервис · бот + лендинг</div>
+          <h3>«Гараж 57»: запись на ремонт и каталог запчастей</h3>
+          <p class="task">Мастер под машиной, телефон звонит — не взял, клиент уехал в соседний сервис. Половина звонков — «есть ли колодки и сколько стоят».</p>
+          <ul>
+            <li><b>Заявка вместо записи на время</b>: цену ремонта мастер называет после осмотра, поэтому бот собирает то, что нужно для звонка, — машину, что беспокоит, когда удобно.</li>
+            <li><b>Каталог запчастей с ценой и наличием</b> и в боте, и на сайте. «Заказать с установкой» — это сразу и продажа детали, и запись на ремонт.</li>
+            <li><b>Нет детали — подбор по VIN</b>: это тоже заявка, а не потерянный клиент.</li>
+            <li><b>Постоянный клиент не вводит данные заново</b> — бот помнит имя, телефон и машину.</li>
+          </ul>
+          <div class="work__f">
+            <a class="btn g s" href="https://t.me/Distribution_services_bot" target="_blank" rel="noopener">Открыть бота</a>
+            <a class="btn g s" href="https://kvi57play-ux.github.io/garazh57/" target="_blank" rel="noopener">Открыть сайт</a>
+            <span class="note">Учебная работа: автосервис условный, цены демо. Заявки приходят мне — можно проверить вживую.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <a class="shot" href="https://kvi57play-ux.github.io/wolf-and-raven/" target="_blank" rel="noopener"><img src="img/fotograf.jpg" alt="Первый экран лендинга семейного фотографа" loading="lazy"></a>
+        <div class="work__b">
+          <div class="n">Семейный фотограф · бот + лендинг</div>
+          <h3>Бот заявок и лендинг для семейного фотографа</h3>
+          <p class="task">Семьи пишут когда угодно — ночью, пока фотограф на съёмке. Ответил через три часа, а они уже договорились с другим. И каждый второй спрашивает одно и то же: как проходит съёмка и что, если ребёнок заболеет.</p>
+          <ul>
+            <li><b>Четыре вопроса</b> — имя, телефон, вид съёмки, дата — и заявка у фотографа, с кнопкой «написать» клиенту.</li>
+            <li><b>Калькулятор на сайте</b>: расчёт стоимости приходит вместе с заявкой.</li>
+            <li><b>Частые вопросы — одной кнопкой</b>: как проходит съёмка, предоплата, перенос, если ребёнок заболел.</li>
+            <li><b>Анкету нельзя «сломать»</b>: «Назад» помнит ответы, брошенная анкета продолжается с того же места.</li>
+          </ul>
+          <div class="work__f">
+            <a class="btn g s" href="https://t.me/Bot_t_p_v57_bot" target="_blank" rel="noopener">Открыть бота</a>
+            <a class="btn g s" href="https://kvi57play-ux.github.io/wolf-and-raven/" target="_blank" rel="noopener">Открыть сайт</a>
+            <span class="note">Учебная работа по брифу: фотограф условный. Заявки приходят мне — можно проверить вживую.</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Обо мне</h2>
+    <div class="about">
+      <div><em>Радиоинженер</em>Десять лет на витебском заводе «Витязь» — от мастера до заместителя начальника производства. Как устроен ремонт техники и о чём спрашивает клиент, знаю изнутри.</div>
+      <div><em>Пишу без воды</em>На сайте — то, что важно клиенту: что делаете, как проходит работа, сколько это примерно стоит. Чего не знаю — пишу «уточняется», а не выдумываю.</div>
+      <div><em>Сдаю рабочим</em>Каждую форму и каждого бота проверяю по живой ссылке: заявка должна реально дойти до Вас, а не «выглядеть отправленной».</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Как проходит работа</h2>
+    <p>Чтобы было понятно, что будет после того, как Вы напишете.</p>
+    <div class="how">
+      <div><b>Шаг 1</b><span><em>Разговор</em>Что за бизнес, кто клиенты, что они чаще всего спрашивают. Минут пятнадцать.</span></div>
+      <div><b>Шаг 2</b><span><em>Черновик</em>Показываю сайт или бота по живой ссылке. Можно потрогать и оставить пробную заявку.</span></div>
+      <div><b>Шаг 3</b><span><em>Правки</em>Меняю тексты, кнопки, вопросы — пока не будет удобно Вам и клиентам.</span></div>
+      <div><b>Шаг 4</b><span><em>Сдача</em>Заявки переключаю на Ваш Telegram, отдаю инструкцию простыми словами.</span></div>
+    </div>
+  </section>
+
+  <div class="foot" id="contact">
+    <h2>Напишите — отвечу сегодня</h2>
+    <p>Расскажите в двух словах, что за бизнес и что нужно: сайт, бот или оба сразу. Если возьмусь — скажу сразу, если задача не моя — тоже скажу.</p>
+    <div class="cta">
+      <a class="btn" href="https://t.me/KVictor1957" target="_blank" rel="noopener">Написать в Telegram</a>
+    </div>
+  </div>
+
+  <p class="small">Волк · Витебск · 2026</p>
+
+</div>
+</body>
+</html>
