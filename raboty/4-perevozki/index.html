@@ -173,7 +173,7 @@ footer a{color:var(--mist)}
 </head>
 <body>
 
-<div class="demo"><b>Демо-концепт.</b> Учебная работа по открытому объявлению перевозчика на Kufar. Это не его сайт, заявки никуда не отправляются, цены — из объявления, «от».</div>
+<div class="demo"><b>Демо-концепт.</b> Учебная работа по открытому объявлению перевозчика на Kufar. Это не его сайт: заявки и сообщения в Telegram получает автор демо, а не перевозчик. Цены — из объявления, «от».</div>
 
 <nav><div class="wrap">
   <a class="logo" href="#"><span class="mark"><svg viewBox="0 0 24 24"><path d="M3 5h11v9H3zM14 8h4l3 3v3h-7zM6.5 18.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6zm11 0a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"/></svg></span><span>Грузоперевозки · Витебск<small>переезды, грузчики, вывоз мусора</small></span></a>
@@ -282,8 +282,9 @@ footer a{color:var(--mist)}
 <section id="zayavka" style="padding-top:0"><div class="wrap lead">
   <div class="l">
     <div class="eyebrow">Заявка</div>
-    <h2>Отправьте расчёт — перевозчик перезвонит</h2>
+    <h2>Отправьте расчёт</h2>
     <p>Расчёт из калькулятора уже в заявке. Добавьте адреса и дату — так цену назовут точнее.</p>
+    <p style="font-size:13.5px;margin-top:10px"><b>Демо:</b> заявка придёт автору этой работы в Telegram, а не перевозчику — так можно проверить, как всё устроено.</p>
     <ul><li>на месте — через час</li><li>без выходных</li><li>наличный и безналичный расчёт</li></ul>
     <a class="tg" id="tgBtn" href="#" aria-disabled="true"><svg viewBox="0 0 24 24"><path d="M21.9 4.3l-3.2 15.1c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.2 13 1.4 11.5c-1-.3-1-1 .2-1.5L20.5 2.8c.9-.3 1.6.2 1.4 1.5z"/></svg><span id="tgTxt">Написать в Telegram <small>· подключим позже</small></span></a>
   </div>
@@ -305,7 +306,7 @@ footer a{color:var(--mist)}
 </div></section>
 
 <footer><div class="wrap">
-  Демо-концепт по открытому объявлению на Kufar (Витебск, на Kufar с марта 2024). Цены — из объявления, «от», не являются публичной офертой; окончательную стоимость называет перевозчик.<br>
+  Демо-концепт по открытому объявлению на Kufar (Витебск, на Kufar с марта 2024). Заявки получает автор демо, а не перевозчик. Цены — из объявления, «от», не являются публичной офертой.<br>
   Фото: <a href="https://commons.wikimedia.org/wiki/File:2016_GAZ_A31R32_GAZelle_Next_orange_front.jpg" target="_blank" rel="noopener">alex74_2011</a>, CC BY 4.0;
   <a href="https://commons.wikimedia.org/wiki/File:An_Overview_of_Moving_Companies_and_Their_Use_of_Moving_Boxes.jpg" target="_blank" rel="noopener">brownpau</a>, CC BY 2.0 — Wikimedia Commons. Иллюстрации, не фото перевозчика.
 </div></footer>
@@ -331,7 +332,7 @@ const PRICE = {
 //   LEAD_URL     — адрес приёма заявок бота (как у «Гаража 57»: https://<воркер>.workers.dev/lead);
 //                  пока пусто, форма демо и никуда не отправляет.
 // =====================================================================
-const CONTACT = { TELEGRAM_URL: '', LEAD_URL: '' };
+const CONTACT = { TELEGRAM_URL: 'https://t.me/My_57_bot', LEAD_URL: 'https://pereezd-bot.volk-studio.workers.dev/lead' };
 
 const CARS = { bus: 'обычный бус', gazel: 'большая газель', none: 'без машины' };
 const MOVERS_MAX = 6;
@@ -451,7 +452,7 @@ $('f').addEventListener('submit', async function (e) {
     } catch (x) {}
     $('send').disabled = false; $('send').textContent = 'Отправить заявку';
     if (!ok) { err.textContent = 'Не получилось отправить заявку. Попробуйте ещё раз или напишите в Telegram.'; err.style.display = 'block'; return; }
-    $('ok').textContent = 'Спасибо! Заявка с расчётом отправлена — перевозчик перезвонит.';
+    $('ok').textContent = 'Спасибо! Заявка с расчётом отправлена в Telegram. Это демо: её получил автор работы, а не перевозчик.';
   }
   $('ok').style.display = 'block';
   $('send').disabled = true;
